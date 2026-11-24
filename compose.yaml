@@ -1,0 +1,18 @@
+services:
+  lipa-na-mpesa-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lipa-na-mpesa-server
+    ports:
+      - "8000:8080"
+    secrets:
+      - doppler-token
+    entrypoint:
+      - /bin/sh
+      - -ec
+      - 'DOPPLER_TOKEN="$$(cat /run/secrets/doppler-token)"; test -n "$$DOPPLER_TOKEN"; export DOPPLER_TOKEN; exec doppler run -- /server'
+
+secrets:
+  doppler-token:
+    file: ./secrets/doppler-token.txt

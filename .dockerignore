@@ -1,4 +1,5 @@
 .git
+/secrets/doppler-token.txt
 .env
 .env.*
 !.env.example
